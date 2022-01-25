@@ -11,29 +11,41 @@
   <script src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.38/browser.min.js"></script>
 
-  <style>
-
-  </style>
 </head>
 <body>
   
-  <div id="root"></div>
-
-  <div class="d-flex">
-    <div class="hour-10th">1</div>
-    <div class="hour-1th">2</div>
-    <div class="minute-10th">3</div>
-    <div class="minute-1th">4</div>
-    <div class="second-10th">5</div>
-    <div class="second-1th">6</div>
-  </div>
+  <div id="binaryClock"></div>
 
   <script type="text/babel">
 
+    const filledBox = {
+      display: 'inline-block',
+      width: '96px',
+      height: '96px',
+      margin: '2px',
+      backgroundColor: '#333'
+    }
+
+    const emptyBox = {
+      display: 'inline-block',
+      width: '96px',
+      height: '96px',
+      margin: '2px',
+      border: '1px solid #ccc'
+    }
+
+    const boxContainer = {
+      display: 'flex',
+      flexFlow: 'column wrap',
+      height: '400',
+      width: '600'
+    }
+
+    // Clock start
     showClockDiv()
+    setInterval(showClockDiv, 1000)
 
-    // setInterval(showClockDiv, 1000)
-
+    // Show and update clock
     function showClockDiv () {
 
       // Get hh, mm, ss string
@@ -41,32 +53,42 @@
       const hh = convertToTwoLetters(date.getHours())
       const mm = convertToTwoLetters(date.getMinutes())
       const ss = convertToTwoLetters(date.getSeconds())
-      const hhmmssStr = hh + mm + ss
+      const hhmmss = hh + mm + ss
+      console.log(`${hh}:${mm}:${ss}`)
 
       // Convert "hhmmss" to "000100010001000100010001"
-      let binaryTime = ""
-      for (let i = 0; i < hhmmssStr.length ; i++) {
-        const numStr = hhmmssStr.substr(i, 1)
+      let binaryHhmmss = ""
+      for (let i = 0; i < hhmmss.length ; i++) {
+        const numStr = hhmmss.substr(i, 1)
         const num = parseInt(numStr)
         const binaryStr = num.toString(2)
         const fourBinaryStr = ('0000' + binaryStr).slice(-4)
-        binaryTime += fourBinaryStr
+        binaryHhmmss += fourBinaryStr
       }
 
+      // Create all boxes
+      let divs = []
+      for (let i = 0; i < binaryHhmmss.length; i++) {
+        if (binaryHhmmss.substr(i, 1) === '0') {
+          divs.push(
+            <div style={emptyBox}></div>
+          )
+        } else {
+          divs.push(
+            <div style={filledBox}></div>
+          )
+        }
+      }
 
+      // Rendering execute
+      const binaryClock = <div style={boxContainer}>{divs}</div>
+      ReactDOM.render(binaryClock, document.querySelector('#binaryClock'))
     }
 
+    // Convert h to "hh", 7 -> 07
     function convertToTwoLetters (v) {
       v = String("00" + v)
       return v.substr(v.length - 2, 2)
-    }
-
-    const boxDivStyle = {
-      display: 'inline-block',
-      width: '100px',
-      height: '100px',
-      margin: '20px',
-      backgroundColor: 'black'
     }
 
   </script>
