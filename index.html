@@ -73,9 +73,9 @@
       for (let i = 0; i < hhmmss.length ; i++) {
         const oneChar = hhmmss.substr(i, 1) // '2' <- '213047'
         const oneNum = parseInt(oneChar) // 2 <- '2'
-        const oneBinaryChar = oneNum.toString(2) // '10' <- 2
-        const fourBinaryStr = ('0000' + oneBinaryChar).slice(-4) // '0010' <- '10'
-        binaryHhmmss += fourBinaryStr
+        const binaryStr = oneNum.toString(2) // '10' <- 2
+        const filledBinaryStr = ('0000' + binaryStr).slice(-4) // '0010' <- '10'
+        binaryHhmmss += filledBinaryStr
       }
 
       // Create 24 boxes
@@ -103,10 +103,10 @@
       ReactDOM.render(binaryClock, document.querySelector('#root'))
     }
 
-    // Convert h to 'hh', 7 -> 07
-    function convertToTwoLetters (v) {
-      v = String('00' + v)
-      return v.substr(v.length - 2, 2)
+    // Convert h to 'hh'
+    function convertToTwoLetters (num) {
+      const filledNumStr = String('00' + num) // '005' <- 5
+      return filledNumStr.substr(filledNumStr.length - 2, 2) // '05' <- '005'
     }
 
   </script>
