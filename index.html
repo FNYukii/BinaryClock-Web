@@ -6,13 +6,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hello React</title>
 
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <script src="https://unpkg.com/react@15/dist/react.min.js"></script>
   <script src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.38/browser.min.js"></script>
+
+  <style>
+
+  </style>
 </head>
 <body>
   
   <div id="root"></div>
+
+  <div class="d-flex">
+    <div class="hour-10th">1</div>
+    <div class="hour-1th">2</div>
+    <div class="minute-10th">3</div>
+    <div class="minute-1th">4</div>
+    <div class="second-10th">5</div>
+    <div class="second-1th">6</div>
+  </div>
 
   <script type="text/babel">
 
@@ -21,36 +35,38 @@
     // setInterval(showClockDiv, 1000)
 
     function showClockDiv () {
+
+      // Get hh, mm, ss string
       const date = new Date()
-      const hh = converter(date.getHours())
-      const mm = converter(date.getMinutes())
-      const ss = converter(date.getSeconds())
-      const hhmmss = hh + mm + ss
+      const hh = convertToTwoLetters(date.getHours())
+      const mm = convertToTwoLetters(date.getMinutes())
+      const ss = convertToTwoLetters(date.getSeconds())
+      const hhmmssStr = hh + mm + ss
 
-      for (let i = 0; i < hhmmss.length ; i++) {
-
-        const numStr = hhmmss.substr(i, 1)
+      // Convert "hhmmss" to "000100010001000100010001"
+      let binaryTime = ""
+      for (let i = 0; i < hhmmssStr.length ; i++) {
+        const numStr = hhmmssStr.substr(i, 1)
         const num = parseInt(numStr)
         const binaryStr = num.toString(2)
-        const longBinaryStr = "0000" + binaryStr
-        const eightBinaryStr = longBinaryStr.substr()
-
-        
-        console.log(`numStr: ${numStr}`)
-        console.log(`longBinaryStr: ${longBinaryStr}`)
-
-      } 
+        const fourBinaryStr = ('0000' + binaryStr).slice(-4)
+        binaryTime += fourBinaryStr
+      }
 
 
-      
-
-      const clockDiv = <div>{hhmmss}</div>
-      ReactDOM.render(clockDiv, document.querySelector('#root'))
     }
 
-    function converter (v) {
+    function convertToTwoLetters (v) {
       v = String("00" + v)
       return v.substr(v.length - 2, 2)
+    }
+
+    const boxDivStyle = {
+      display: 'inline-block',
+      width: '100px',
+      height: '100px',
+      margin: '20px',
+      backgroundColor: 'black'
     }
 
   </script>
