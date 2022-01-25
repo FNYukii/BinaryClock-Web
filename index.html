@@ -14,7 +14,7 @@
 </head>
 <body>
   
-  <div id="binaryClock"></div>
+  <div id="root"></div>
 
   <script type="text/babel">
 
@@ -31,14 +31,17 @@
       width: '96px',
       height: '96px',
       margin: '2px',
-      border: '1px solid #ccc'
+      border: '1px solid #ddd'
     }
 
     const boxContainer = {
       display: 'flex',
       flexFlow: 'column wrap',
       height: '400',
-      width: '600'
+      width: '600',
+      marginTop: '70',
+      marginLeft: 'auto',
+      marginRight: 'auto'
     }
 
     // Clock start
@@ -82,7 +85,7 @@
 
       // Rendering execute
       const binaryClock = <div style={boxContainer}>{divs}</div>
-      ReactDOM.render(binaryClock, document.querySelector('#binaryClock'))
+      ReactDOM.render(binaryClock, document.querySelector('#root'))
     }
 
     // Convert h to "hh", 7 -> 07
