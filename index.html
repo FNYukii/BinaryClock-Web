@@ -25,13 +25,21 @@
       backgroundColor: '#333'
     }
 
-    // Transparent box styles
+    // Border box styles
     const emptyBox = {
       display: 'inline-block',
       width: '96px',
       height: '96px',
       margin: '2px',
       border: '1px solid #ddd'
+    }
+
+    // Transparent box styles
+    const transparentBox = {
+      display: 'inline-block',
+      width: '96px',
+      height: '96px',
+      margin: '2px',
     }
 
     // Box container styles
@@ -73,7 +81,13 @@
       // Create 24 boxes
       let boxes = []
       for (let i = 0; i < binaryHhmmss.length; i++) {
-        if (binaryHhmmss.substr(i, 1) === '0') {
+
+        // If i = 0, 1, 8, 16 make box transparent
+        if (i === 0 || i === 1 || i === 8 || i === 16) {
+          boxes.push(
+            <div style={transparentBox}></div>
+          )
+        } else if (binaryHhmmss.substr(i, 1) === '0') {
           boxes.push(
             <div style={emptyBox}></div>
           )
