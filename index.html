@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hello React</title>
+
+  <script src="https://unpkg.com/react@15/dist/react.min.js"></script>
+  <script src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.38/browser.min.js"></script>
+</head>
+<body>
+  
+  <div id="root"></div>
+
+  <script type="text/babel">
+
+    showClockDiv()
+
+    // setInterval(showClockDiv, 1000)
+
+    function showClockDiv () {
+      const date = new Date()
+      const hh = converter(date.getHours())
+      const mm = converter(date.getMinutes())
+      const ss = converter(date.getSeconds())
+      const hhmmss = hh + mm + ss
+
+      for (let i = 0; i < hhmmss.length ; i++) {
+
+        const numStr = hhmmss.substr(i, 1)
+        const num = parseInt(numStr)
+        const binaryStr = num.toString(2)
+        const longBinaryStr = "0000" + binaryStr
+        const eightBinaryStr = longBinaryStr.substr()
+
+        
+        console.log(`numStr: ${numStr}`)
+        console.log(`longBinaryStr: ${longBinaryStr}`)
+
+      } 
+
+
+      
+
+      const clockDiv = <div>{hhmmss}</div>
+      ReactDOM.render(clockDiv, document.querySelector('#root'))
+    }
+
+    function converter (v) {
+      v = String("00" + v)
+      return v.substr(v.length - 2, 2)
+    }
+
+  </script>
+</body>
+</html>
