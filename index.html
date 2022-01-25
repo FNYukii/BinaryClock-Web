@@ -60,7 +60,7 @@
       const hhmmss = hh + mm + ss
       console.log(`${hh}:${mm}:${ss}`)
 
-      // Convert 'hhmmss' to '000100010001000100010001'
+      // Convert 'hhmmss' to binary 'hhhhhhhhmmmmmmmmssssssss'
       let binaryHhmmss = ''
       for (let i = 0; i < hhmmss.length ; i++) {
         const oneChar = hhmmss.substr(i, 1) // '5' <- '531964'
