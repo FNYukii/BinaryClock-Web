@@ -63,10 +63,10 @@
       // Convert 'hhmmss' to binary 'hhhhhhhhmmmmmmmmssssssss'
       let binaryHhmmss = ''
       for (let i = 0; i < hhmmss.length ; i++) {
-        const oneChar = hhmmss.substr(i, 1) // '5' <- '531964'
-        const oneNum = parseInt(oneChar) // 5 <- '5'
-        const oneBinaryChar = oneNum.toString(2) // '101' <- 5
-        const fourBinaryStr = ('0000' + oneBinaryChar).slice(-4) // '0101' <- '101'
+        const oneChar = hhmmss.substr(i, 1) // '2' <- '213047'
+        const oneNum = parseInt(oneChar) // 2 <- '2'
+        const oneBinaryChar = oneNum.toString(2) // '10' <- 2
+        const fourBinaryStr = ('0000' + oneBinaryChar).slice(-4) // '0010' <- '10'
         binaryHhmmss += fourBinaryStr
       }
 
