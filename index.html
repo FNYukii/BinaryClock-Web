@@ -16,8 +16,8 @@
 
   <script type="text/babel">
 
-    // Black box styles
-    const filledBox = {
+    // Black square styles
+    const filledSquare = {
       display: 'inline-block',
       width: '96px',
       height: '96px',
@@ -25,8 +25,8 @@
       backgroundColor: '#333'
     }
 
-    // Border box styles
-    const emptyBox = {
+    // Border square styles
+    const emptySquare = {
       display: 'inline-block',
       width: '96px',
       height: '96px',
@@ -34,16 +34,16 @@
       border: '1px solid #ddd'
     }
 
-    // Transparent box styles
-    const transparentBox = {
+    // Transparent square styles
+    const transparentSquare = {
       display: 'inline-block',
       width: '96px',
       height: '96px',
       margin: '2px',
     }
 
-    // Box container styles
-    const boxContainer = {
+    // S˝quare container styles
+    const squareContainer = {
       display: 'flex',
       flexFlow: 'column wrap',
       height: '400',
@@ -78,28 +78,28 @@
         binaryHhmmss += filledBinaryStr
       }
 
-      // Create 24 boxes
-      let boxes = []
+      // Create 24 squares
+      let squares = []
       for (let i = 0; i < binaryHhmmss.length; i++) {
 
-        // If i = 0, 1, 8, 16 make box transparent
+        // If i = 0, 1, 8, 16 make square transparent
         if (i === 0 || i === 1 || i === 8 || i === 16) {
-          boxes.push(
-            <div style={transparentBox}></div>
+          squares.push(
+            <div style={transparentSquare}></div>
           )
         } else if (binaryHhmmss.substr(i, 1) === '0') {
-          boxes.push(
-            <div style={emptyBox}></div>
+          squares.push(
+            <div style={emptySquare}></div>
           )
         } else {
-          boxes.push(
-            <div style={filledBox}></div>
+          squares.push(
+            <div style={filledSquare}></div>
           )
         }
       }
 
       // Rendering execute
-      const binaryClock = <div style={boxContainer}>{boxes}</div>
+      const binaryClock = <div style={squareContainer}>{squares}</div>
       ReactDOM.render(binaryClock, document.querySelector('#root'))
     }
 
